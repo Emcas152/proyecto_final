@@ -13,20 +13,21 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Region() {
+export default function Region(props) {
     const [ Error, setError ] = useState(false)
     const [ loading, setLoading ] = useState(true)
-    const [ regionID, setregionID ] = useState('')
+    const [ regionID, setRegionID ] = useState([])
 
     useEffect(() => {
-        async function fetchRegion(){
-            try{
-                const regiones = await fetch(this.props.url)
-                const response = await regiones.json();
-                setregionID(response.results)
-                console.log(response)
-                setLoading(false)
+
+        const fetchRegion = async () => {
+            try {
+                const result = await fetch(props.url)
+                const json = await result.json()
+                setRegionID(json.results);
+                setLoading(false);
                 setError(false)
+                console.log(json)
             } catch (e) {
                 console.log(e)
                 setLoading(false)

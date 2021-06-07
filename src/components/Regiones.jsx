@@ -44,7 +44,7 @@ export default function RegionesPage() {
                     {loading ? (<h1>Cargando datos..</h1>) : Error ? (<h1>Ocurrio un error</h1>) :
                     (Regiones.map((Item, index) => {
                         return (
-                            <Region url={Item.url} index={index}/>
+                            <Region url={Item.url}/>
                         )
                         }))}
                 </Grid>
