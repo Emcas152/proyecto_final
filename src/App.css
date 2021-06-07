@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+.LinkDeco {
+  text-decoration: none;
+  color: #000;
+}

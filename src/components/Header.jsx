@@ -1,18 +1,19 @@
-import React  from "react"
+import React  from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import {AppBar, Toolbar, IconButton,Typography, Button } from "@material-ui/core"
+import {AppBar, Toolbar, IconButton,Typography } from "@material-ui/core"
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function Header() {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+    let { Page } = useParams();
+    const [anchorEl, setAnchorEl] = React.useState(false);
+    const handleClick = () => {
+        setAnchorEl(true);
     };
     const handleClose = () => {
-        setAnchorEl(null);
+        setAnchorEl(false);
     };
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -26,18 +27,17 @@ export default function Header() {
         },
     }));
     const classes = useStyles();
-
+    console.log(window.location.pathname);
     return (
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} />
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                        <MenuIcon>Menu</MenuIcon>
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        News
+                        {Page}
                     </Typography>
-                    <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
             <Menu
@@ -47,8 +47,8 @@ export default function Header() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <MenuItem onClick={handleClose}><Link to={"/"}>Inicio</Link></MenuItem>
-                <MenuItem onClick={handleClose}><Link to={"/Regiones"}>Regiones</Link></MenuItem>
+                <Link to={"/Inicio"} className={'LinkDeco'}><MenuItem onClick={handleClose}>Inicio</MenuItem></Link>
+                <Link to={"/Regiones"} className={'LinkDeco'}><MenuItem onClick={handleClose}>Regiones</MenuItem></Link>
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
             </Menu>
         </div>

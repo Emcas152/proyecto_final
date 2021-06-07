@@ -5,20 +5,19 @@ import RegionesPage from "./components/Regiones"
 import Header from "./components/Header";
 
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-        <Header />
+        <Route path="/:Page" children={<Header />} />
       <Switch>
-        <Route path="/Regiones">
+          <Route exact path="/Inicio">
+              <LandingPage />
+          </Route>
+          <Route exact path="/Regiones">
             <RegionesPage />
-        </Route>
-        <Route path="/">
-            <LandingPage />
-        </Route>
+          </Route>
       </Switch>
+
     </div>
   );
 }
-
-export default App;
