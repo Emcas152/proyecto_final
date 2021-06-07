@@ -27,8 +27,7 @@ export default function Header() {
         },
     }));
     const classes = useStyles();
-    console.log(window.location.pathname);
-    return (
+        return (
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>

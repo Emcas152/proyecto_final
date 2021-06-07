@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Container, makeStyles} from "@material-ui/core";
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Region from "./region";
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -14,62 +14,42 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RegionesPage() {
-    const [ error, setError ] = useState(false)
+    const [ Error, setError ] = useState(false)
     const [ loading, setLoading ] = useState(true)
-    const [ regiones, setRegiones ] = useState(null)
-    const [ regionID, setregionID ] = useState('')
+    const [ Regiones, setRegiones ] = useState([])
 
     useEffect(() => {
             async function fetchRegiones(){
             try{
-                const regiones = await fetch(`https://pokeapi.co/api/v2/location/${regionID}`)
+                const regiones = await fetch(`https://pokeapi.co/api/v2/region/`)
                 const response = await regiones.json();
-                console.log(response)
+                setRegiones(response.results)
                 setLoading(false)
                 setError(false)
             } catch (e) {
-                console.log(e)
                 setLoading(false)
                 setError(true)
             }
             }
         fetchRegiones()
-        }, [regionID])
+        }, [])
 
     const classes = useStyles();
 
-    function FormRow() {
-        return (
-            <>
-                <Grid item xs={4}>
-                    <Paper className={classes.paper}>item</Paper>
-                </Grid>
-                <Grid item xs={4}>
-                    <Paper className={classes.paper}>item</Paper>
-                </Grid>
-                <Grid item xs={4}>
-                    <Paper className={classes.paper}>item</Paper>
-                </Grid>
-            </>
-        );
-    }
-
-    return (
-        <Container >
+    return <Container >
             <h1>Regiones</h1>
             <div className={classes.root}>
             <Grid container spacing={1}>
                 <Grid container item xs={12} spacing={3}>
-                    <FormRow />
-                </Grid>
-                <Grid container item xs={12} spacing={3}>
-                    <FormRow />
-                </Grid>
-                <Grid container item xs={12} spacing={3}>
-                    <FormRow />
+                    {loading ? (<h1>Cargando datos..</h1>) : Error ? (<h1>Ocurrio un error</h1>) :
+                    (Regiones.map((Item, index) => {
+                        return (
+                            <Region url={Item.url} index={index}/>
+                        )
+                        }))}
                 </Grid>
             </Grid>
         </div>
         </Container>
-    );
+        ;
 }
