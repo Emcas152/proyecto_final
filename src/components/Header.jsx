@@ -8,12 +8,12 @@ import { Link, useParams } from "react-router-dom";
 
 export default function Header() {
     let { Page } = useParams();
-    const [anchorEl, setAnchorEl] = React.useState(false);
-    const handleClick = () => {
-        setAnchorEl(true);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
-        setAnchorEl(false);
+        setAnchorEl(null);
     };
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -48,7 +48,7 @@ export default function Header() {
             >
                 <Link to={"/Inicio"} className={'LinkDeco'}><MenuItem onClick={handleClose}>Inicio</MenuItem></Link>
                 <Link to={"/Regiones"} className={'LinkDeco'}><MenuItem onClick={handleClose}>Regiones</MenuItem></Link>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <Link to={"/Pokemon"} className={'LinkDeco'}><MenuItem onClick={handleClose}>Pokemon</MenuItem></Link>
             </Menu>
         </div>
     );

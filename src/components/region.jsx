@@ -2,32 +2,51 @@ import React, {useEffect, useState} from 'react'
 import { makeStyles} from "@material-ui/core";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     paper: {
         padding: theme.spacing(1),
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
+    bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
+    },
+    title: {
+        fontSize: 14,
+    },
+    pos: {
+        marginBottom: 12,
+    },
 }));
 
 export default function Region(props) {
     const [ Error, setError ] = useState(false)
     const [ loading, setLoading ] = useState(true)
-    const [ regionID, setRegionID ] = useState([])
+    const [ RegionID, setRegionID ] = useState([])
 
     useEffect(() => {
-
         const fetchRegion = async () => {
             try {
                 const result = await fetch(props.url)
                 const json = await result.json()
-                setRegionID(json.results);
+                console.log(json)
+                setRegionID(json.name);
                 setLoading(false);
                 setError(false)
-                console.log(json)
             } catch (e) {
                 console.log(e)
                 setLoading(false)
@@ -35,13 +54,29 @@ export default function Region(props) {
             }
         }
         fetchRegion()
-    }, [])
-
+    })
     const classes = useStyles();
     return loading ? (<h1>Cargando datos..</h1>) : Error ? (<h1>Ocurrio un error</h1>) :
-        ( regionID.map((Item, index) => {
-            return <Grid item xs={4} key={index}>
-                <Paper className={classes.paper}>{Item.name}</Paper>
-            </Grid>}
-        ))
+        ( <><Grid item xs={4} >
+                <Paper className={classes.paper}>
+                    <Card className={classes.root}>
+                        <CardContent>
+                            <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                {RegionID}
+                            </Typography>
+                            <Typography variant="body2" component="p">
+                                well meaning and kindly.
+                                <br />
+                                {'"a benevolent smile"'}
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+
+                        </CardActions>
+                    </Card>
+                </Paper>
+
+            </Grid>
+            </>
+        )
 }

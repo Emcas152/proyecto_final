@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {Container, makeStyles} from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 import Region from "./region";
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -44,12 +45,13 @@ export default function RegionesPage() {
                     {loading ? (<h1>Cargando datos..</h1>) : Error ? (<h1>Ocurrio un error</h1>) :
                     (Regiones.map((Item, index) => {
                         return (
-                            <Region url={Item.url}/>
+                            <Region url={Item.url} key={index}/>
                         )
                         }))}
                 </Grid>
             </Grid>
         </div>
+
         </Container>
         ;
 }
