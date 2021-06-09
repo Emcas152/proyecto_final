@@ -6,11 +6,19 @@ import reportWebVitals from './reportWebVitals';
 import {
     BrowserRouter,
 } from "react-router-dom";
-
+import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
+const theme = createMuiTheme({
+    palette: {
+        backgroundColor: '#242424',
+        type: 'dark'
+    },
+});
 ReactDOM.render(
     <BrowserRouter>
       <React.StrictMode>
+      <MuiThemeProvider theme={theme}>
         <App />
+      </MuiThemeProvider>
       </React.StrictMode>
     </BrowserRouter>,
   document.getElementById('root')

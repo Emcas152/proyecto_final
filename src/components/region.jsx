@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { makeStyles} from "@material-ui/core";
+import {Button, Link, makeStyles} from "@material-ui/core";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -37,6 +37,7 @@ export default function Region(props) {
     const [ Error, setError ] = useState(false)
     const [ loading, setLoading ] = useState(true)
     const [ RegionID, setRegionID ] = useState([])
+    const [ RegionURL, setRegionURL ] = useState([])
 
     useEffect(() => {
         const fetchRegion = async () => {
@@ -45,6 +46,7 @@ export default function Region(props) {
                 const json = await result.json()
                 console.log(json)
                 setRegionID(json.name);
+                setRegionURL(json.url);
                 setLoading(false);
                 setError(false)
             } catch (e) {
@@ -71,7 +73,8 @@ export default function Region(props) {
                             </Typography>
                         </CardContent>
                         <CardActions>
-
+                            <Button size="small" >
+                                <Link rel="stylesheet" path="/DetalleRegion" url={`https://pokeapi.co/api/v2/region/${RegionID}`} className={'LinkDeco'} replace>Ver más</Link></Button>
                         </CardActions>
                     </Card>
                 </Paper>
