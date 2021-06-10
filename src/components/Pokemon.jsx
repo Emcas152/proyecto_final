@@ -37,6 +37,7 @@ export default function Pokemon(props) {
     const [ loading, setLoading ] = useState(true)
     const [ PokemonID, setPokemonID ] = useState([])
     const [ PokemonImg, setPokemonImg ] = useState([])
+    const [ PokemonEff, setPokemonEff ] = useState([])
 
     useEffect(() => {
         const fetchPokemon = async () => {
@@ -46,6 +47,7 @@ export default function Pokemon(props) {
                 console.log(json)
                 setPokemonID(json.name);
                 setPokemonImg(json.sprites.front_default);
+                setPokemonEff(json.effect_entries.short_effect);
                 setLoading(false);
                 setError(false)
             } catch (e) {
@@ -71,8 +73,7 @@ export default function Pokemon(props) {
                     {PokemonID}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    Lizards are a widespread group of squamate reptiles, with over
-                    6,000 species, ranging across all continents except Antarctica
+                    {PokemonEff}
                 </Typography>
             </CardContent>
         </CardActionArea>
