@@ -34,19 +34,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Region(props) {
+export default function Ciudad(props) {
     const [ Error, setError ] = useState(false)
     const [ loading, setLoading ] = useState(true)
-    const [ RegionID, setRegionID ] = useState([])
-    const [ RegionUrl, setRegionUrl ] = useState([])
+    const [ CiudadID, setCiudadID ] = useState([])
+    const [ CiudadUrl, setCiudadUrl ] = useState([])
 
     useEffect(() => {
-        const fetchRegion = async () => {
+        const fetchCiudad = async () => {
             try {
                 const result = await fetch(props.url)
                 const json = await result.json()
-                setRegionID(json.name);
-                setRegionUrl(json.id);
+                setCiudadID(json.name);
+                setCiudadUrl(json.id);
                 setLoading(false);
                 setError(false)
             } catch (e) {
@@ -55,7 +55,7 @@ export default function Region(props) {
                 setError(true)
             }
         }
-        fetchRegion()
+        fetchCiudad()
     },[])
     const classes = useStyles();
     return loading ? (<img src={pokebola} alt="Logo" className={'App-Poke'}/>) : Error ? (<h1>Ocurrio un error</h1>) :
@@ -64,7 +64,7 @@ export default function Region(props) {
                     <Card className={classes.root}>
                         <CardContent>
                             <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                {RegionID}
+                                {CiudadID}
                             </Typography>
                             <Typography variant="body2" component="p">
                                 well meaning and kindly.
@@ -73,8 +73,6 @@ export default function Region(props) {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button size="small" >
-                                <Link rel="stylesheet" href={`/DetalleRegion/${RegionUrl}`} className={'LinkDeco'} replace>Ver más</Link></Button>
                         </CardActions>
                     </Card>
                 </Paper>

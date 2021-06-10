@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { Link, useParams } from "react-router-dom";
 
 export default function Header() {
-    let { Page } = useParams();
+    const { Page } = useParams();
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
 

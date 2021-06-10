@@ -27,7 +27,7 @@ export default function App() {
               <Route exact path="/Pokemon">
                   <PokemonPage />
               </Route>
-              <Route exact path="/DetalleRegion">
+                  <Route exact path="/DetalleRegion/:id">
                   <DetalleRegion />
               </Route>
           </Switch>

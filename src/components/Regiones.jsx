@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {Container, makeStyles} from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 import Region from "./region";
+import pokebola from "./../images/pokebola.png"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function RegionesPage() {
+export default function RegionesPage(props) {
     const [ Error, setError ] = useState(false)
     const [ loading, setLoading ] = useState(true)
     const [ Regiones, setRegiones ] = useState([])
@@ -32,7 +33,7 @@ export default function RegionesPage() {
                 setError(true)
             }
             }
-        fetchRegiones()
+        const timer = setTimeout(() => fetchRegiones(), 3000);
         }, [])
 
     const classes = useStyles();
@@ -42,7 +43,7 @@ export default function RegionesPage() {
             <div className={classes.root}>
             <Grid container spacing={1}>
                 <Grid container item xs={12} spacing={3}>
-                    {loading ? (<h1>Cargando datos..</h1>) : Error ? (<h1>Ocurrio un error</h1>) :
+                    {loading ? (<img src={pokebola} alt="Logo" className={'App-Poke'}/>) : Error ? (<h1>Ocurrio un error</h1>) :
                     (Regiones.map((Item, index) => {
                         return (
                             <Region url={Item.url} key={index}/>

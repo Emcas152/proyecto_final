@@ -39,3 +39,23 @@
   text-decoration: none;
   color: #000;
 }
+
+.App-Poke {
+  height: 20vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-Poke {
+    animation: App-Poke-spin infinite 10s linear;
+  }
+}
+
+@keyframes App-Poke-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
