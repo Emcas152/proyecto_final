@@ -79,7 +79,7 @@ export default function Header() {
                                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                                     <Link to={"/Inicio"} className={'LinkDeco'}><MenuItem onClick={handleClose}>Inicio</MenuItem></Link>
                                     <Link to={"/Regiones"} className={'LinkDeco'}><MenuItem onClick={handleClose}>Regiones</MenuItem></Link>
-                                    <Link to={"/Pokemon"} className={'LinkDeco'}><MenuItem onClick={handleClose}>Pokemon</MenuItem></Link>
+                                    <Link to={"/ListaPokemon"} className={'LinkDeco'}><MenuItem onClick={handleClose}>Pokemon</MenuItem></Link>
                                 </MenuList>
                             </ClickAwayListener>
                         </Paper>

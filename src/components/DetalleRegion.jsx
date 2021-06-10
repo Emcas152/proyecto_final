@@ -56,9 +56,9 @@ export default function DetalleRegion(props) {
                 setError(true)
             }
         }
-        const timer = setTimeout(() => fetchDetalleRegion(), 3000);
+        setTimeout(() => fetchDetalleRegion(), 3000);
         /*clearTimeout(timer);*/
-    },[])
+    },[id])
     const classes = useStyles();
     return loading ? (<img src={pokebola} alt="Logo" className={'App-Poke'}/>) : Error ? (<h1>Ocurrio un error</h1>) :
         (<Container >

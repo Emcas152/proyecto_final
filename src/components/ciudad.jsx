@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Button, CircularProgress, Link, makeStyles} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -38,7 +38,7 @@ export default function Ciudad(props) {
     const [ Error, setError ] = useState(false)
     const [ loading, setLoading ] = useState(true)
     const [ CiudadID, setCiudadID ] = useState([])
-    const [ CiudadUrl, setCiudadUrl ] = useState([])
+    /*const [ CiudadUrl, setCiudadUrl ] = useState([])*/
 
     useEffect(() => {
         const fetchCiudad = async () => {
@@ -46,7 +46,7 @@ export default function Ciudad(props) {
                 const result = await fetch(props.url)
                 const json = await result.json()
                 setCiudadID(json.name);
-                setCiudadUrl(json.id);
+                /*setCiudadUrl(json.id);*/
                 setLoading(false);
                 setError(false)
             } catch (e) {
@@ -56,7 +56,7 @@ export default function Ciudad(props) {
             }
         }
         fetchCiudad()
-    },[])
+    },[props.url])
     const classes = useStyles();
     return loading ? (<img src={pokebola} alt="Logo" className={'App-Poke'}/>) : Error ? (<h1>Ocurrio un error</h1>) :
         ( <><Grid item xs={4} >

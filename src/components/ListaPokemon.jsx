@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Container, makeStyles} from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
-import Region from "./region";
+import Pokemon from "./Pokemon";
 import pokebola from "./../images/pokebola.png"
 
 const useStyles = makeStyles((theme) => ({
@@ -15,44 +15,42 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function RegionesPage(props) {
+export default function PokemonPage(props) {
     const [ Error, setError ] = useState(false)
     const [ loading, setLoading ] = useState(true)
-    const [ Regiones, setRegiones ] = useState([])
+    const [ Pokemons, setPokemons ] = useState([])
 
     useEffect(() => {
-            async function fetchRegiones(){
+        async function fetchPokemons(){
             try{
-                const regiones = await fetch(`https://pokeapi.co/api/v2/region/`)
-                const response = await regiones.json();
-                setRegiones(response.results)
+                const Pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=12`)
+                const response = await Pokemon.json();
+                setPokemons(response.results)
                 setLoading(false)
                 setError(false)
             } catch (e) {
                 setLoading(false)
                 setError(true)
             }
-            }
-         setTimeout(() => fetchRegiones(), 3000);
-        }, [])
+        }
+        setTimeout(() => fetchPokemons(), 3000);
+    }, [])
 
     const classes = useStyles();
-
     return <Container >
-            <h1>Regiones</h1>
-            <div className={classes.root}>
+        <h1>Pokemon</h1>
+        <div className={classes.root}>
             <Grid container spacing={1}>
                 <Grid container item xs={12} spacing={3}>
                     {loading ? (<img src={pokebola} alt="Logo" className={'App-Poke'}/>) : Error ? (<h1>Ocurrio un error</h1>) :
-                    (Regiones.map((Item, index) => {
-                        return (
-                            <Region url={Item.url} key={index}/>
-                        )
+                        (Pokemons.map((Item, index) => {
+                            return (
+                                <Pokemon url={Item.url} key={index}/>
+                            )
                         }))}
                 </Grid>
             </Grid>
         </div>
-
-        </Container>
+    </Container>
         ;
 }

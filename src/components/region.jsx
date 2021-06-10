@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Button, CircularProgress, Link, makeStyles} from "@material-ui/core";
+import {Button,  Link, makeStyles} from "@material-ui/core";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -56,7 +56,7 @@ export default function Region(props) {
             }
         }
         fetchRegion()
-    },[])
+    },[props.url])
     const classes = useStyles();
     return loading ? (<img src={pokebola} alt="Logo" className={'App-Poke'}/>) : Error ? (<h1>Ocurrio un error</h1>) :
         ( <><Grid item xs={4} >

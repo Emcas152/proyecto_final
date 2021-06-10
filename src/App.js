@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import LandingPage from "./components/Landing"
 import RegionesPage from "./components/Regiones"
 import Header from "./components/Header";
-import PokemonPage from "./components/Pokemon";
+import PokemonPage from "./components/ListaPokemon";
 import DetalleRegion from "./components/DetalleRegion";
 
 
@@ -24,7 +24,7 @@ export default function App() {
               <Route exact path="/Regiones">
                 <RegionesPage />
               </Route>
-              <Route exact path="/Pokemon">
+              <Route exact path="/ListaPokemon">
                   <PokemonPage />
               </Route>
                   <Route exact path="/DetalleRegion/:id">
