@@ -37,17 +37,16 @@ export default function Pokemon(props) {
     const [ loading, setLoading ] = useState(true)
     const [ PokemonID, setPokemonID ] = useState([])
     const [ PokemonImg, setPokemonImg ] = useState([])
-    const [ PokemonEff, setPokemonEff ] = useState([])
+    const [ PokemonAbb, setPokemonAbb ] = useState([])
 
     useEffect(() => {
         const fetchPokemon = async () => {
             try {
                 const result = await fetch(props.url)
                 const json = await result.json()
-                console.log(json)
                 setPokemonID(json.name);
                 setPokemonImg(json.sprites.front_default);
-                setPokemonEff(json.effect_entries.short_effect);
+                setPokemonAbb(json.abilities);
                 setLoading(false);
                 setError(false)
             } catch (e) {
@@ -73,7 +72,8 @@ export default function Pokemon(props) {
                     {PokemonID}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    {PokemonEff}
+                    <h4>Habilidades</h4>
+                    {PokemonAbb.map((Item,index)=> {return (<li>{Item.ability.name}</li>)})}
                 </Typography>
             </CardContent>
         </CardActionArea>
