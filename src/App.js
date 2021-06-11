@@ -5,6 +5,7 @@ import RegionesPage from "./components/Regiones"
 import Header from "./components/Header";
 import PokemonPage from "./components/ListaPokemon";
 import DetalleRegion from "./components/DetalleRegion";
+import DetallePokemon from "./components/DetallePokemon";
 
 
 
@@ -27,8 +28,11 @@ export default function App() {
               <Route exact path="/ListaPokemon">
                   <PokemonPage />
               </Route>
-                  <Route exact path="/DetalleRegion/:id">
+              <Route exact path="/DetalleRegion/:id">
                   <DetalleRegion />
+              </Route>
+              <Route exact path="/DetallePokemon/:name">
+                  <DetallePokemon />
               </Route>
           </Switch>
         </div>

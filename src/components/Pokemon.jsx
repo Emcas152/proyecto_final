@@ -9,25 +9,42 @@ import CardMedia from "@material-ui/core/CardMedia";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Grid from "@material-ui/core/Grid";
 import pokebola from "../images/pokebola.png";
-import {Paper} from "@material-ui/core";
+import {Link, Paper} from "@material-ui/core";
 
 
 const pokemonTypesToColors = {
-    'bug': '#e0e5c3',
-    'dragon': '#c8b1db',
-    'ice': '#d4f8f9',
-    'fighting': '#f2c9c6',
-    'fire': '#f9dfb8',
-    'flying': '#e2ccfc',
-    'grass': '#b8f2b8',
-    'ghost': '#bcb4c4',
-    'ground': '#d8d1c3',
-    'electric': '#ffffa5',
-    'normal': '#cecdc4',
-    'poison': '#e6b5f2',
-    'psychic': '#f7afd8',
-    'rock': '#cbccaf',
-    'water': '#adcef7'
+    'bug': 'linear-gradient(135deg, rgba(217,255,0,1) 0%, rgba(113,133,0,1) 70%)',
+    'dragon': 'linear-gradient(135deg, rgba(186,102,255,1) 0%, rgba(255,255,255,1) 70%)',
+    'ice': 'linear-gradient(135deg, rgba(134,252,255,1) 0%, rgba(255,255,255,1) 70%)',
+    'fighting': 'linear-gradient(135deg, rgba(242,201,198,1) 0%, rgba(255,255,255,1) 70%)',
+    'fire': 'linear-gradient(135deg, rgba(255,39,39,1) 0%, rgba(64,0,0,1) 70%)',
+    'flying': 'linear-gradient(135deg, rgba(226,204,252,1) 0%, rgba(255,255,255,1) 70%)',
+    'grass': 'linear-gradient(135deg, rgba(79,247,79,1) 0%, rgba(255,255,255,1) 70%)',
+    'ghost': 'linear-gradient(135deg, rgba(86,0,172,1) 0%, rgba(0,0,0,1) 70%)',
+    'ground': 'linear-gradient(135deg, rgba(255,200,91,1) 0%, rgba(0,0,0,1) 70%)',
+    'electric': 'linear-gradient(135deg, rgba(255,255,16,1) 0%, rgba(0,0,0,1) 70%)',
+    'normal': 'linear-gradient(135deg, rgba(206,205,196,1) 0%, rgba(0,0,0,1) 70%)',
+    'poison': 'linear-gradient(135deg, rgba(230,181,242,1) 0%, rgba(0,0,0,1) 70%)',
+    'psychic': 'linear-gradient(135deg, rgba(247,175,216,1) 0%, rgba(0,0,0,1) 70%)',
+    'rock': 'linear-gradient(135deg, rgba(203,204,175,1) 0%, rgba(0,0,0,1) 70%)',
+    'water': 'linear-gradient(135deg, rgba(113,176,255,1) 0%, rgba(0,57,128,1) 70%)'
+};
+const pokemonColors = {
+    'bug': '#000',
+    'dragon': '#fff',
+    'ice': '#000',
+    'fighting': '#000',
+    'fire': '#fff',
+    'flying': '#000',
+    'grass': '#000',
+    'ghost': '#fff',
+    'ground': '#fff',
+    'electric': '#fff',
+    'normal': '#fff',
+    'poison': '#fff',
+    'psychic': '#fff',
+    'rock': '#fff',
+    'water': '#000'
 };
 const useStyles = makeStyles({
     container: {
@@ -65,7 +82,6 @@ export default function Pokemon(props) {
             try {
                 const result = await fetch(props.url)
                 const json = await result.json()
-                console.log(json)
                 setPokemonID(json.name);
                 setPokemonImg(json.sprites.front_default);
                 setPokemonAbb(json.abilities);
@@ -83,39 +99,44 @@ export default function Pokemon(props) {
 
     return loading ? (<img src={pokebola} alt="Logo" className={'App-Poke'}/>) : Error ? (<h1>Ocurrio un error</h1>) :
         (<><Grid item xs={4} >
-        <Card className={classes.card}>
-        <CardActionArea>
-            <CardMedia
-                className={classes.media}
-                image={PokemonImg}
-                title={PokemonID}
-            />
-            <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                    {PokemonID}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    <h4>Habilidades</h4>
-                    {PokemonAbb.map((Item,index)=> {return <li key={index}>{Item.ability.name}</li>})}
-                    <Grid container spacing={1}>
-                        <Grid container item xs={12} spacing={1}>
-                        {PokemonTyp.map((Item,index)=> {return <Grid item xs={6} >
-                        <Paper variant="outlined" key={index} style={{backgroundColor: pokemonTypesToColors[Item.type.name]} } square>{Item.type.name}</Paper>
-                            </Grid>})}
-                        </Grid>
-                    </Grid>
-                </Typography>
-            </CardContent>
-        </CardActionArea>
-        <CardActions>
-            <Button size="small" color="primary">
-                Share
-            </Button>
-            <Button size="small" color="primary">
-                Learn More
-            </Button>
-        </CardActions>
-    </Card>
+        <Link href={`DetallePokemon/${PokemonID}`}>
+            <Card className={classes.card}>
+                <CardActionArea>
+                    <CardMedia
+                        className={classes.media}
+                        image={PokemonImg}
+                        title={PokemonID}
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {PokemonID}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            <h4>Habilidades</h4>
+                            <Grid container spacing={1}>
+                                {PokemonAbb.map((Item,index)=> {return <Grid item xs={6} ><Paper variant="outlined" key={index} square>{Item.ability.name}</Paper></Grid>})}
+                            </Grid>
+                            <h4>Tipo de Pokemon</h4>
+                            <Grid container spacing={1}>
+                                <Grid container item xs={12} spacing={1}>
+                                {PokemonTyp.map((Item,index)=> {return <Grid item xs={6} >
+                                <Paper variant="outlined" key={index} style={{background: pokemonTypesToColors[Item.type.name], color: pokemonColors[Item.type.name]} } square>{Item.type.name}</Paper>
+                                    </Grid>})}
+                                </Grid>
+                            </Grid>
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+                <CardActions>
+                    <Button size="small" color="primary">
+                        Share
+                    </Button>
+                    <Button size="small" color="primary">
+                        Learn More
+                    </Button>
+                </CardActions>
+            </Card>
+        </Link>
     </Grid></>
         )
 }
