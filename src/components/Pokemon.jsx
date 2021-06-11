@@ -9,6 +9,26 @@ import CardMedia from "@material-ui/core/CardMedia";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Grid from "@material-ui/core/Grid";
 import pokebola from "../images/pokebola.png";
+import {Paper} from "@material-ui/core";
+
+
+const pokemonTypesToColors = {
+    'bug': '#e0e5c3',
+    'dragon': '#c8b1db',
+    'ice': '#d4f8f9',
+    'fighting': '#f2c9c6',
+    'fire': '#f9dfb8',
+    'flying': '#e2ccfc',
+    'grass': '#b8f2b8',
+    'ghost': '#bcb4c4',
+    'ground': '#d8d1c3',
+    'electric': '#ffffa5',
+    'normal': '#cecdc4',
+    'poison': '#e6b5f2',
+    'psychic': '#f7afd8',
+    'rock': '#cbccaf',
+    'water': '#adcef7'
+};
 const useStyles = makeStyles({
     container: {
         display: "flex",
@@ -38,15 +58,18 @@ export default function Pokemon(props) {
     const [ PokemonID, setPokemonID ] = useState([])
     const [ PokemonImg, setPokemonImg ] = useState([])
     const [ PokemonAbb, setPokemonAbb ] = useState([])
+    const [ PokemonTyp, setPokemonTyp ] = useState([])
 
     useEffect(() => {
         const fetchPokemon = async () => {
             try {
                 const result = await fetch(props.url)
                 const json = await result.json()
+                console.log(json)
                 setPokemonID(json.name);
                 setPokemonImg(json.sprites.front_default);
                 setPokemonAbb(json.abilities);
+                setPokemonTyp(json.types)
                 setLoading(false);
                 setError(false)
             } catch (e) {
@@ -73,7 +96,14 @@ export default function Pokemon(props) {
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
                     <h4>Habilidades</h4>
-                    {PokemonAbb.map((Item,index)=> {return (<li>{Item.ability.name}</li>)})}
+                    {PokemonAbb.map((Item,index)=> {return <li key={index}>{Item.ability.name}</li>})}
+                    <Grid container spacing={1}>
+                        <Grid container item xs={12} spacing={1}>
+                        {PokemonTyp.map((Item,index)=> {return <Grid item xs={6} >
+                        <Paper variant="outlined" key={index} style={{backgroundColor: pokemonTypesToColors[Item.type.name]} } square>{Item.type.name}</Paper>
+                            </Grid>})}
+                        </Grid>
+                    </Grid>
                 </Typography>
             </CardContent>
         </CardActionArea>
