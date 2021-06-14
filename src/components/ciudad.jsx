@@ -66,17 +66,11 @@ export default function Ciudad(props) {
                             <Typography className={classes.title} color="textSecondary" gutterBottom>
                                 {CiudadID}
                             </Typography>
-                            <Typography variant="body2" component="p">
-                                well meaning and kindly.
-                                <br />
-                                {'"a benevolent smile"'}
-                            </Typography>
                         </CardContent>
                         <CardActions>
                         </CardActions>
                     </Card>
                 </Paper>
-
             </Grid>
             </>
         )

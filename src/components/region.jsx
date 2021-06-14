@@ -39,12 +39,14 @@ export default function Region(props) {
     const [ loading, setLoading ] = useState(true)
     const [ RegionID, setRegionID ] = useState([])
     const [ RegionUrl, setRegionUrl ] = useState([])
+    const [ RegionData, setRegionData ] = useState([])
 
     useEffect(() => {
         const fetchRegion = async () => {
             try {
                 const result = await fetch(props.url)
                 const json = await result.json()
+                setRegionData(json)
                 setRegionID(json.name);
                 setRegionUrl(json.id);
                 setLoading(false);
@@ -66,10 +68,10 @@ export default function Region(props) {
                             <Typography className={classes.title} color="textSecondary" gutterBottom>
                                 {RegionID}
                             </Typography>
-                            <Typography variant="body2" component="p">
-                                well meaning and kindly.
-                                <br />
-                                {'"a benevolent smile"'}
+                            <Typography variant="body2" component="div">
+                                <Paper elevation={3}>Generación Principal.
+                                <hr />
+                                {RegionData.main_generation.name}</Paper>
                             </Typography>
                         </CardContent>
                         <CardActions>

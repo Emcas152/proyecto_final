@@ -47,6 +47,7 @@ export default function DetalleRegion(props) {
             try {
                 const result = await fetch(`https://pokeapi.co/api/v2/region/${id}`)
                 const json = await result.json()
+                console.log(json)
                 setCiudadID(json.locations);
                 setLoading(false);
                 setError(false)

@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -83,7 +81,7 @@ export default function Pokemon(props) {
                 const result = await fetch(props.url)
                 const json = await result.json()
                 setPokemonID(json.name);
-                setPokemonImg(json.sprites.front_default);
+                setPokemonImg(json.sprites.other["official-artwork"].front_default);
                 setPokemonAbb(json.abilities);
                 setPokemonTyp(json.types)
                 setLoading(false);
@@ -103,7 +101,8 @@ export default function Pokemon(props) {
             <Card className={classes.card}>
                 <CardActionArea>
                     <CardMedia
-                        className={classes.media}
+                        component="img"
+                        height="100%"
                         image={PokemonImg}
                         title={PokemonID}
                     />
@@ -111,15 +110,15 @@ export default function Pokemon(props) {
                         <Typography gutterBottom variant="h5" component="h2">
                             {PokemonID}
                         </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
+                        <Typography variant="body2" color="textSecondary" component="div">
                             <h4>Habilidades</h4>
                             <Grid container spacing={1}>
-                                {PokemonAbb.map((Item,index)=> {return <Grid item xs={6} ><Paper variant="outlined" key={index} square>{Item.ability.name}</Paper></Grid>})}
+                                {PokemonAbb.map((Item,index)=> {return <Grid item xs={6} key={index}><Paper variant="outlined" key={index} square>{Item.ability.name}</Paper></Grid>})}
                             </Grid>
                             <h4>Tipo de Pokemon</h4>
                             <Grid container spacing={1}>
                                 <Grid container item xs={12} spacing={1}>
-                                {PokemonTyp.map((Item,index)=> {return <Grid item xs={6} >
+                                {PokemonTyp.map((Item,index)=> {return <Grid item xs={6} key={index}>
                                 <Paper variant="outlined" key={index} style={{background: pokemonTypesToColors[Item.type.name], color: pokemonColors[Item.type.name]} } square>{Item.type.name}</Paper>
                                     </Grid>})}
                                 </Grid>
@@ -127,14 +126,6 @@ export default function Pokemon(props) {
                         </Typography>
                     </CardContent>
                 </CardActionArea>
-                <CardActions>
-                    <Button size="small" color="primary">
-                        Share
-                    </Button>
-                    <Button size="small" color="primary">
-                        Learn More
-                    </Button>
-                </CardActions>
             </Card>
         </Link>
     </Grid></>

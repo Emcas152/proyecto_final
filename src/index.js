@@ -15,11 +15,9 @@ const theme = createMuiTheme({
 });
 ReactDOM.render(
     <BrowserRouter>
-      <React.StrictMode>
       <MuiThemeProvider theme={theme}>
         <App />
       </MuiThemeProvider>
-      </React.StrictMode>
     </BrowserRouter>,
   document.getElementById('root')
 );
