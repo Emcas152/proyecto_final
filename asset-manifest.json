@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/proyecto_final/static/css/main.4d3628d5.chunk.css",
+    "main.js": "/proyecto_final/static/js/main.69e0beb3.chunk.js",
+    "main.js.map": "/proyecto_final/static/js/main.69e0beb3.chunk.js.map",
+    "runtime-main.js": "/proyecto_final/static/js/runtime-main.5640ffeb.js",
+    "runtime-main.js.map": "/proyecto_final/static/js/runtime-main.5640ffeb.js.map",
+    "static/js/2.397caa60.chunk.js": "/proyecto_final/static/js/2.397caa60.chunk.js",
+    "static/js/2.397caa60.chunk.js.map": "/proyecto_final/static/js/2.397caa60.chunk.js.map",
+    "static/js/3.325a2db2.chunk.js": "/proyecto_final/static/js/3.325a2db2.chunk.js",
+    "static/js/3.325a2db2.chunk.js.map": "/proyecto_final/static/js/3.325a2db2.chunk.js.map",
+    "index.html": "/proyecto_final/index.html",
+    "static/css/main.4d3628d5.chunk.css.map": "/proyecto_final/static/css/main.4d3628d5.chunk.css.map",
+    "static/js/2.397caa60.chunk.js.LICENSE.txt": "/proyecto_final/static/js/2.397caa60.chunk.js.LICENSE.txt",
+    "static/media/Logo.f144d2f0.png": "/proyecto_final/static/media/Logo.f144d2f0.png",
+    "static/media/pokebola.1e479e0a.png": "/proyecto_final/static/media/pokebola.1e479e0a.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5640ffeb.js",
+    "static/js/2.397caa60.chunk.js",
+    "static/css/main.4d3628d5.chunk.css",
+    "static/js/main.69e0beb3.chunk.js"
+  ]
+}
